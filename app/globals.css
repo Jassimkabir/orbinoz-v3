@@ -1,26 +1,153 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  --color-paper: #f6f4ef;
+  --color-paper-2: #efece4;
+  --color-card: #ffffff;
+  --color-ink: #16150f;
+  --color-ink-2: #4b4940;
+  --color-muted: #8c887c;
+  --color-line: #e3ded2;
+
+  /* Single accent token — swap this one value to re-skin the site. */
+  --color-accent: #1f3fd6;
+  --color-accent-soft: #eaeeff;
+
+  --font-display: var(--font-display), Georgia, serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --accent: #1f3fd6;
+  --line: #e3ded2;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: auto;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- Lenis ---- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* ---- Type ---- */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size 0.5s var(--ease-out-expo);
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* ---- Buttons ---- */
+.btn-solid {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 1rem 1.9rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-paper);
+  background: var(--color-ink);
+  border-radius: 999px;
+  transition:
+    background-color 0.4s var(--ease-out-expo),
+    color 0.4s var(--ease-out-expo),
+    transform 0.4s var(--ease-out-expo);
+}
+.btn-solid:hover {
+  background: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 1rem 1.9rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  transition:
+    border-color 0.4s var(--ease-out-expo),
+    background-color 0.4s var(--ease-out-expo);
+}
+.btn-outline:hover {
+  border-color: var(--color-ink);
+  background: var(--color-card);
+}
+
+/* ---- Marquee ---- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 34s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
 }
