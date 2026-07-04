@@ -35,7 +35,7 @@ export default function Contact() {
           <Reveal delay={0.12}>
             <p className="mt-7 max-w-md text-lg leading-relaxed text-ink-2">
               Tell us what you&apos;re planning. We reply to every brief
-              personally — usually within one business day.
+              personally, usually within one business day.
             </p>
           </Reveal>
 

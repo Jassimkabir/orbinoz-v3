@@ -21,7 +21,7 @@ export default function SmoothScroll({
       lerp: 0.09,
       smoothWheel: true,
       wheelMultiplier: 1,
-      // Leave touch to the browser's native momentum — it's smoother on phones
+      // Leave touch to the browser's native momentum (smoother on phones)
       // than JS-driven smoothing, and keeps the page feeling responsive.
       syncTouch: false,
       touchMultiplier: 1.6,
