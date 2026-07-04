@@ -2,14 +2,30 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu01Icon, Cancel01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
+import {
+  ArrowRight01Icon,
+  ArrowUpRight01Icon,
+  InstagramIcon,
+  Linkedin01Icon,
+  NewTwitterIcon,
+  Facebook01Icon,
+} from "@hugeicons/core-free-icons";
 import { Icon } from "./ui/hugeicon";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const LINKS = [
   { id: "#about", label: "About" },
   { id: "#services", label: "Services" },
   { id: "#gallery", label: "Work" },
   { id: "#contact", label: "Contact" },
+];
+
+const SOCIALS = [
+  { label: "Instagram", icon: InstagramIcon },
+  { label: "LinkedIn", icon: Linkedin01Icon },
+  { label: "Twitter", icon: NewTwitterIcon },
+  { label: "Facebook", icon: Facebook01Icon },
 ];
 
 export default function Nav() {
@@ -23,83 +39,144 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const close = () => setOpen(false);
+  const linksBase = 0.3; // links reveal after the panel has mostly opened
+
   return (
-    <motion.header
-      initial={{ y: -24, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter,border-color,padding] duration-500 ${
-        solid
-          ? "border-b border-line bg-paper/80 py-3.5 backdrop-blur-xl"
-          : "border-b border-transparent py-6"
-      }`}
-    >
-      <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-5 sm:px-8">
-        <a href="#home" className="font-display text-2xl tracking-tight text-ink">
-          Orbinoz
-        </a>
-
-        <div className="hidden items-center gap-9 md:flex">
-          {LINKS.map((l) => (
-            <a
-              key={l.id}
-              href={l.id}
-              className="link-underline text-[0.95rem] text-ink-2 transition-colors hover:text-ink"
-            >
-              {l.label}
-            </a>
-          ))}
-          <a href="#contact" className="btn-solid !py-2.5 !text-sm">
-            Start a project
-            <Icon icon={ArrowRight01Icon} size={16} />
+    <>
+      {/* Header stays on top; the menu grows out from underneath it */}
+      <motion.header
+        initial={{ y: -24, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter,border-color,padding] duration-500 ${
+          open
+            ? "bg-paper py-6"
+            : solid
+              ? "border-b border-line bg-paper/80 py-3.5 backdrop-blur-xl"
+              : "border-b border-transparent py-6"
+        }`}
+      >
+        <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-5 sm:px-8">
+          <a
+            href="#home"
+            onClick={close}
+            className="font-display text-2xl tracking-tight text-ink"
+          >
+            Orbinoz
           </a>
-        </div>
 
-        <button
-          onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center text-ink md:hidden"
-          aria-label="Toggle menu"
-          aria-expanded={open}
-        >
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.span
-              key={open ? "close" : "menu"}
-              initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
-              animate={{ opacity: 1, rotate: 0, scale: 1 }}
-              exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="flex"
-            >
-              <Icon icon={open ? Cancel01Icon : Menu01Icon} size={26} />
-            </motion.span>
-          </AnimatePresence>
-        </button>
-      </nav>
+          <div className="hidden items-center gap-9 md:flex">
+            {LINKS.map((l) => (
+              <a
+                key={l.id}
+                href={l.id}
+                className="link-underline text-[0.95rem] text-ink-2 transition-colors hover:text-ink"
+              >
+                {l.label}
+              </a>
+            ))}
+            <a href="#contact" className="btn-solid !py-2.5 !text-sm">
+              Start a project
+              <Icon icon={ArrowRight01Icon} size={16} />
+            </a>
+          </div>
 
+          {/* Hamburger that morphs into an X in place */}
+          <motion.button
+            onClick={() => setOpen((v) => !v)}
+            whileTap={{ scale: 0.86 }}
+            transition={{ duration: 0.2, ease: EASE }}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className="-mr-1.5 flex h-10 w-10 flex-col items-center justify-center gap-1.5 text-ink md:hidden"
+          >
+            <span
+              className={`h-px w-6 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                open ? "translate-y-[3.5px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`h-px w-6 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                open ? "-translate-y-[3.5px] -rotate-45" : ""
+              }`}
+            />
+          </motion.button>
+        </nav>
+      </motion.header>
+
+      {/* Menu panel — expands from the top, seamless with the header */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden md:hidden"
+            key="menu"
+            data-lenis-prevent
+            initial={{ clipPath: "inset(0% 0% 100% 0%)" }}
+            animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+            exit={{
+              clipPath: "inset(0% 0% 100% 0%)",
+              transition: { duration: 0.5, ease: EASE, delay: 0.05 },
+            }}
+            transition={{ duration: 0.62, ease: EASE }}
+            className="fixed inset-0 z-40 flex flex-col bg-paper pt-20 text-ink md:hidden"
           >
-            <div className="flex flex-col gap-4 px-6 py-6">
-              {LINKS.map((l) => (
-                <a
-                  key={l.id}
-                  href={l.id}
-                  onClick={() => setOpen(false)}
-                  className="font-display text-3xl text-ink"
-                >
-                  {l.label}
-                </a>
+            <nav className="flex flex-1 flex-col justify-center gap-1 px-6">
+              {LINKS.map((l, i) => (
+                <div key={l.id} className="overflow-hidden py-1">
+                  <motion.a
+                    href={l.id}
+                    onClick={close}
+                    initial={{ y: "115%" }}
+                    animate={{ y: "0%" }}
+                    exit={{ opacity: 0, transition: { duration: 0.18 } }}
+                    transition={{ duration: 0.75, ease: EASE, delay: linksBase + i * 0.07 }}
+                    className="block font-display text-[3.4rem] font-light leading-[1.1] tracking-[-0.01em] text-ink transition-colors hover:text-accent"
+                  >
+                    {l.label}
+                  </motion.a>
+                </div>
               ))}
-            </div>
+
+              <motion.a
+                href="#contact"
+                onClick={close}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, transition: { duration: 0.15 } }}
+                transition={{ delay: linksBase + LINKS.length * 0.07, duration: 0.5, ease: EASE }}
+                className="mt-8 inline-flex w-fit items-center gap-2.5 rounded-full bg-ink px-7 py-3.5 text-sm font-medium text-paper"
+              >
+                Start a project
+                <Icon icon={ArrowUpRight01Icon} size={16} />
+              </motion.a>
+            </nav>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, transition: { duration: 0.15 } }}
+              transition={{ delay: 0.55, duration: 0.5, ease: EASE }}
+              className="flex flex-col gap-4 border-t border-line px-6 py-7"
+            >
+              <a href="mailto:info@orbinozevents.com" className="text-ink-2 transition-colors hover:text-ink">
+                info@orbinozevents.com
+              </a>
+              <div className="flex gap-2.5">
+                {SOCIALS.map((s) => (
+                  <a
+                    key={s.label}
+                    href="#"
+                    aria-label={s.label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-2 transition-colors hover:border-ink hover:text-ink"
+                  >
+                    <Icon icon={s.icon} size={17} />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </>
   );
 }

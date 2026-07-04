@@ -11,7 +11,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const SERVICES = [
   {
     title: "Corporate Events",
-    desc: "Conferences, launches, town halls and celebrations — planned and run end to end, so the day unfolds exactly as briefed.",
+    desc: "Conferences, launches, town halls and celebrations, planned and run end to end so the day goes exactly as briefed.",
     img: "/gallery/01.jpg",
     tags: ["Planning", "Logistics", "On-site"],
   },
@@ -29,7 +29,7 @@ const SERVICES = [
   },
   {
     title: "Audio-Visual",
-    desc: "Sound, lighting, LED and video — a technical layer that disappears into the experience instead of interrupting it.",
+    desc: "Sound, lighting, LED and video: the technical layer that disappears into the experience instead of interrupting it.",
     img: "/gallery/10.jpg",
     tags: ["Sound", "Lighting", "LED / Video"],
   },
@@ -66,8 +66,8 @@ export default function Services() {
           </div>
           <Reveal delay={0.1}>
             <p className="max-w-xs text-ink-2">
-              Tap any service to see it in action. Take one, or hand us the whole
-              event — it stays in one pair of hands.
+              Tap any service to see it in action. Take one, or hand us the
+              whole event; either way it stays in one pair of hands.
             </p>
           </Reveal>
         </div>

@@ -1,11 +1,22 @@
+"use client";
+
 import {
-  ArrowRight01Icon,
+  ArrowUpRight01Icon,
   InstagramIcon,
   Linkedin01Icon,
   NewTwitterIcon,
   Facebook01Icon,
 } from "@hugeicons/core-free-icons";
+import { Reveal, AnimatedHeading } from "./motion";
 import { Icon } from "./ui/hugeicon";
+
+const NAV = [
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Work", href: "#gallery" },
+  { label: "Clients", href: "#clients" },
+  { label: "Contact", href: "#contact" },
+];
 
 const SOCIALS = [
   { label: "Instagram", href: "#", icon: InstagramIcon },
@@ -16,64 +27,85 @@ const SOCIALS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-paper">
-      <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8">
-        <div className="flex flex-col justify-between gap-10 border-b border-white/10 pb-14 md:flex-row md:items-end">
-          <div>
-            <p className="text-sm uppercase tracking-[0.14em] text-paper/50">Corporate event studio</p>
-            <p className="mt-5 max-w-2xl font-display text-[clamp(2rem,5vw,3.6rem)] font-light leading-[1.02] tracking-[-0.02em]">
-              Let&apos;s make the next one inevitable.
+    <footer className="relative overflow-hidden bg-ink text-paper">
+      {/* Ambient glow */}
+      <div className="pointer-events-none absolute left-1/2 top-1/3 h-[60vh] w-[80vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(63,104,255,0.14),transparent_66%)] blur-3xl" />
+
+      <div className="relative mx-auto max-w-[1440px] px-5 pt-16 sm:px-8 sm:pt-20">
+        {/* Centered CTA */}
+        <div className="flex flex-col items-center pb-24 pt-8 text-center sm:pb-32 sm:pt-12">
+          <Reveal>
+            <p className="text-sm uppercase tracking-[0.2em] text-paper/50">
+              Have a project in mind?
             </p>
-          </div>
-          <a href="#contact" className="group inline-flex items-center gap-2 self-start rounded-full bg-paper px-7 py-3.5 text-sm font-medium text-ink transition-transform hover:-translate-y-0.5 md:self-auto">
-            Start a project
-            <Icon
-              icon={ArrowRight01Icon}
-              size={16}
-              className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1"
+          </Reveal>
+          <h2 className="mt-7 max-w-4xl font-display text-[clamp(2.4rem,7vw,6rem)] font-light leading-[0.98] tracking-[-0.02em]">
+            <AnimatedHeading
+              text="Let's make the next one inevitable."
+              wordClassName={(w) =>
+                w.startsWith("inevitable") ? "italic text-accent-bright" : ""
+              }
             />
-          </a>
-        </div>
+          </h2>
 
-        <div className="mt-14 grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <a href="#home" className="font-display text-3xl tracking-tight">Orbinoz</a>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-paper/60">
-              Orbinoz Event Planners Pvt. Ltd.<br />
-              Chembumukku, Vazhakkala, Kochi, Kerala 682030
-            </p>
-          </div>
-          <div className="md:col-span-3">
-            <p className="text-xs uppercase tracking-[0.14em] text-paper/40">Navigate</p>
-            <nav className="mt-4 flex flex-col gap-2.5 text-paper/75">
-              <a href="#about" className="link-underline w-fit">About</a>
-              <a href="#services" className="link-underline w-fit">Services</a>
-              <a href="#gallery" className="link-underline w-fit">Work</a>
-              <a href="#contact" className="link-underline w-fit">Contact</a>
-            </nav>
-          </div>
-          <div className="md:col-span-4">
-            <p className="text-xs uppercase tracking-[0.14em] text-paper/40">Connect</p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              {SOCIALS.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-paper/75 transition-colors duration-300 hover:border-paper hover:text-paper"
-                >
-                  <Icon icon={s.icon} size={18} />
-                </a>
-              ))}
+          <Reveal delay={0.15}>
+            <div className="mt-11 flex flex-col items-center gap-6">
+              <a
+                href="#contact"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-paper px-8 py-4 text-sm font-medium text-ink transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:bg-accent hover:text-white"
+              >
+                Start a project
+                <Icon
+                  icon={ArrowUpRight01Icon}
+                  size={17}
+                  className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </a>
+              <a
+                href="mailto:info@orbinozevents.com"
+                className="text-paper/70 transition-colors hover:text-paper"
+              >
+                <span className="link-underline">info@orbinozevents.com</span>
+              </a>
             </div>
-            <a href="mailto:info@orbinozevents.com" className="link-underline mt-5 inline-block text-paper">
-              info@orbinozevents.com
-            </a>
-          </div>
+          </Reveal>
         </div>
 
-        <div className="mt-16 flex flex-col justify-between gap-3 text-xs text-paper/40 sm:flex-row">
+        {/* Meta row */}
+        <div className="flex flex-col items-center justify-between gap-6 border-t border-white/10 py-8 md:flex-row">
+          <nav className="flex flex-wrap justify-center gap-x-7 gap-y-2">
+            {NAV.map((n) => (
+              <a
+                key={n.href}
+                href={n.href}
+                className="text-sm text-paper/70 transition-colors hover:text-paper"
+              >
+                <span className="link-underline">{n.label}</span>
+              </a>
+            ))}
+          </nav>
+          <div className="flex gap-2.5">
+            {SOCIALS.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                aria-label={s.label}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/12 text-paper/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-bright hover:text-paper"
+              >
+                <Icon icon={s.icon} size={17} />
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="relative mx-auto max-w-[1440px] px-5 pb-9 sm:px-8">
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 text-xs text-paper/40 sm:flex-row">
           <p>© {new Date().getFullYear()} Orbinoz Event Planners Pvt. Ltd.</p>
+          <span className="font-display text-sm tracking-tight text-paper/70">
+            Orbinoz
+          </span>
           <p>Kochi · Kerala · India</p>
         </div>
       </div>

@@ -52,9 +52,8 @@ export default function Clients() {
           <div className='lg:col-span-6 lg:col-start-7 lg:self-end'>
             <Reveal delay={0.1}>
               <p className='max-w-md text-lg leading-relaxed text-ink-2'>
-                Nine years of building events with brands across Kerala and
-                beyond, a few of the teams we&apos;ve had the privilege to work
-                with.
+                Nine years of events with brands across Kerala and beyond. A few
+                of the teams we&apos;ve worked with.
               </p>
             </Reveal>
           </div>

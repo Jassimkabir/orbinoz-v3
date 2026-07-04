@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local agent tooling / installed skills
+.claude/
+.agents/
+skills-lock.json
+
+# heavy source asset (shipped as optimized founder-cutout.webp)
+public/founder.png

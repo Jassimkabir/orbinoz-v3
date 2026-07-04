@@ -16,9 +16,9 @@ const sans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Orbinoz — Corporate Event Studio",
+  title: "Orbinoz | Corporate Event Studio",
   description:
-    "Orbinoz Event Planners designs and produces corporate events, entertainment, staging and brand experiences — moments engineered to feel inevitable. Kochi, Kerala.",
+    "Orbinoz Event Planners designs and produces corporate events, entertainment, staging and brand experiences. Moments engineered to feel inevitable. Kochi, Kerala.",
 };
 
 export default function RootLayout({
