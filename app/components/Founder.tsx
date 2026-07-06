@@ -29,7 +29,7 @@ export default function Founder() {
               className='relative mx-auto aspect-[4/5] w-full max-w-[16rem] sm:max-w-[18rem]'
             >
               {/* Cobalt background panel */}
-              <div className='absolute inset-x-0 bottom-0 top-[9%] overflow-hidden rounded-[1.75rem] bg-gradient-to-b from-accent to-[#2b45c9]'>
+              <div className='absolute inset-x-0 bottom-0 top-[9%] overflow-hidden rounded-[1.75rem] bg-gradient-to-b from-accent to-[#0e6aa4]'>
                 <div className='absolute -top-12 left-1/2 h-2/3 w-2/3 -translate-x-1/2 rounded-full bg-white/15 blur-2xl' />
                 <div className='absolute inset-0 bg-[radial-gradient(120%_75%_at_50%_120%,rgba(0,0,0,0.3),transparent_58%)]' />
               </div>

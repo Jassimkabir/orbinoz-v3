@@ -29,7 +29,7 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-ink text-paper">
       {/* Ambient glow */}
-      <div className="pointer-events-none absolute left-1/2 top-1/3 h-[60vh] w-[80vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(63,104,255,0.14),transparent_66%)] blur-3xl" />
+      <div className="pointer-events-none absolute left-1/2 top-1/3 h-[60vh] w-[80vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(24,136,200,0.14),transparent_66%)] blur-3xl" />
 
       <div className="relative mx-auto max-w-[1440px] px-5 pt-16 sm:px-8 sm:pt-20">
         {/* Centered CTA */}
@@ -103,9 +103,12 @@ export default function Footer() {
       <div className="relative mx-auto max-w-[1440px] px-5 pb-9 sm:px-8">
         <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 text-xs text-paper/40 sm:flex-row">
           <p>© {new Date().getFullYear()} Orbinoz Event Planners Pvt. Ltd.</p>
-          <span className="font-display text-sm tracking-tight text-paper/70">
-            Orbinoz
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/icons/logo-white.webp"
+            alt="Orbinoz"
+            className="h-5 w-auto opacity-80"
+          />
           <p>Kochi · Kerala · India</p>
         </div>
       </div>

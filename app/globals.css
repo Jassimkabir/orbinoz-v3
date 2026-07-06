@@ -9,9 +9,10 @@
   --color-muted: #8c887c;
   --color-line: #e3ded2;
 
-  /* Single accent token — swap this one value to re-skin the site. */
-  --color-accent: #1f3fd6;
-  --color-accent-soft: #eaeeff;
+  /* Brand blue sampled from the Orbinoz "Z" mark. */
+  --color-accent: #1888c8;
+  --color-accent-bright: #3aabe6;
+  --color-accent-soft: #e6f3fb;
 
   --font-display: var(--font-display), Georgia, serif;
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
@@ -20,7 +21,8 @@
 }
 
 :root {
-  --accent: #1f3fd6;
+  --accent: #1888c8;
+  --accent-bright: #3aabe6;
   --line: #e3ded2;
   color-scheme: light;
 }

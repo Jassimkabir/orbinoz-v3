@@ -61,9 +61,15 @@ export default function Nav() {
           <a
             href="#home"
             onClick={close}
-            className="font-display text-2xl tracking-tight text-ink"
+            aria-label="Orbinoz, home"
+            className="flex items-center"
           >
-            Orbinoz
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/icons/logo-black.webp"
+              alt="Orbinoz"
+              className="h-8 w-auto sm:h-9"
+            />
           </a>
 
           <div className="hidden items-center gap-9 md:flex">
