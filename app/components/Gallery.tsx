@@ -88,21 +88,21 @@ export default function Gallery() {
             <button
               onClick={close}
               aria-label="Close"
-              className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-paper transition-colors hover:bg-white/10"
+              className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-lg border border-white/20 text-paper transition-colors hover:bg-white/10"
             >
               <Icon icon={Cancel01Icon} size={20} />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); step(-1); }}
               aria-label="Previous"
-              className="absolute left-3 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 text-paper transition-colors hover:bg-white/10 sm:left-8"
+              className="absolute left-3 flex h-12 w-12 items-center justify-center rounded-lg border border-white/20 text-paper transition-colors hover:bg-white/10 sm:left-8"
             >
               <Icon icon={ArrowLeft01Icon} size={20} />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); step(1); }}
               aria-label="Next"
-              className="absolute right-3 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 text-paper transition-colors hover:bg-white/10 sm:right-8"
+              className="absolute right-3 flex h-12 w-12 items-center justify-center rounded-lg border border-white/20 text-paper transition-colors hover:bg-white/10 sm:right-8"
             >
               <Icon icon={ArrowRight01Icon} size={20} />
             </button>

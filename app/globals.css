@@ -105,7 +105,7 @@ html.lenis body {
   font-weight: 500;
   color: var(--color-paper);
   background: var(--color-ink);
-  border-radius: 999px;
+  border-radius: 0.75rem;
   transition:
     background-color 0.4s var(--ease-out-expo),
     color 0.4s var(--ease-out-expo),
@@ -125,7 +125,7 @@ html.lenis body {
   font-weight: 500;
   color: var(--color-ink);
   border: 1px solid var(--color-line);
-  border-radius: 999px;
+  border-radius: 0.75rem;
   transition:
     border-color 0.4s var(--ease-out-expo),
     background-color 0.4s var(--ease-out-expo);

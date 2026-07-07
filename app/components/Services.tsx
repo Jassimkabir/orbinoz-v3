@@ -93,7 +93,7 @@ export default function Services() {
                   <motion.span
                     animate={{ rotate: open ? 45 : 0 }}
                     transition={{ duration: 0.35, ease: EASE }}
-                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
+                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border transition-colors duration-300 ${
                       open
                         ? "border-accent text-accent"
                         : "border-line text-ink group-hover:border-ink"
@@ -135,7 +135,7 @@ export default function Services() {
                             {s.tags.map((t) => (
                               <span
                                 key={t}
-                                className="rounded-full border border-line px-3.5 py-1.5 text-sm text-ink-2"
+                                className="rounded-md border border-line px-3.5 py-1.5 text-sm text-ink-2"
                               >
                                 {t}
                               </span>
