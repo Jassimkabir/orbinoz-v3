@@ -41,22 +41,23 @@ export default function About() {
 
           <div className="lg:col-span-9">
             <h2 className="font-display text-[clamp(1.9rem,3.9vw,3.4rem)] font-light leading-[1.1] tracking-[-0.02em] text-ink">
-              <AnimatedHeading text="For over nine years, we have built corporate events that make brands stronger, connections real and impressions that last." />
+              <AnimatedHeading text="For over nine years, we've built corporate events that make brands look stronger and stay with the people in the room." />
             </h2>
 
             <div className="mt-12 grid gap-8 border-t border-line pt-10 text-ink-2 md:grid-cols-2">
               <Reveal delay={0.05}>
                 <p className="text-[1.05rem] leading-relaxed">
-                  From the first idea to the final cue, we keep everything
-                  in-house: planning, staging, entertainment, production and
-                  audio-visual. One team, one point of contact, no handoffs.
+                  We keep everything in-house, from planning and staging to
+                  entertainment, production and AV. One team, one point of
+                  contact, and nothing lost in a handoff.
                 </p>
               </Reveal>
               <Reveal delay={0.12}>
                 <p className="text-[1.05rem] leading-relaxed">
-                  We care about the small things other people miss and the
-                  coordination nobody notices. That is what makes an event feel
-                  easy on the night, and obvious in hindsight.
+                  We sweat the small stuff and the behind-the-scenes
+                  coordination most people never notice. That's usually the
+                  difference between a night that runs smoothly and one that
+                  doesn't.
                 </p>
               </Reveal>
             </div>

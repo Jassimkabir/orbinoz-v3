@@ -57,20 +57,20 @@ export default function Founder() {
             <blockquote className='mt-6'>
               <Reveal delay={0.04}>
                 <p className='font-display text-[clamp(1.35rem,2.6vw,2.1rem)] font-light leading-[1.3] tracking-[-0.01em] text-ink'>
-                  At Orbinoz we believe that corporate events are more than just
-                  gatherings, they are{' '}
+                  At Orbinoz, we see corporate events as more than gatherings.
+                  Done right, they're some of the{' '}
                   <span className='italic text-accent'>
-                    strategic brand moments.
-                  </span>
-                  .
+                    best brand moments
+                  </span>{' '}
+                  a company gets.
                 </p>
               </Reveal>
               <Reveal delay={0.1}>
                 <p className='mt-5 max-w-xl text-[1.02rem] leading-relaxed text-ink-2'>
-                  Every experience we design is built with purpose, aligned with
-                  business goals, and executed to create lasting impact. We
-                  don&apos;t just manage events we craft platforms where brands
-                  communicate, connect, and grow.
+                  Everything we design has a reason behind it and ties back to
+                  what the business actually needs. We don&apos;t just run
+                  events; we build the moments where brands connect with their
+                  people and grow.
                 </p>
               </Reveal>
             </blockquote>

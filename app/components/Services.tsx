@@ -11,37 +11,37 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const SERVICES = [
   {
     title: "Corporate Events",
-    desc: "Conferences, launches, town halls and celebrations, planned and run end to end so the day goes exactly as briefed.",
+    desc: "Conferences, launches, town halls and celebrations, planned and run end to end so the day goes the way you briefed it.",
     img: "/gallery/01.jpg",
     tags: ["Planning", "Logistics", "On-site"],
   },
   {
     title: "Entertainment",
-    desc: "Artists, hosts and acts curated and managed to land the right energy at the right moment of the evening.",
+    desc: "Artists, hosts and acts, picked and looked after so the right energy lands at the right moment of the night.",
     img: "/gallery/09.jpg",
     tags: ["Talent", "Curation", "Management"],
   },
   {
     title: "Stage & Production",
-    desc: "Sets, scenography and show-calling engineered so the room moves exactly on cue, every cue.",
+    desc: "Sets, scenography and show-calling, so the room moves exactly on cue every time.",
     img: "/gallery/06.jpg",
     tags: ["Scenography", "Rigging", "Show-call"],
   },
   {
     title: "Audio-Visual",
-    desc: "Sound, lighting, LED and video: the technical layer that disappears into the experience instead of interrupting it.",
+    desc: "Sound, lighting, LED and video. The technical side that stays out of the way and just works.",
     img: "/gallery/10.jpg",
     tags: ["Sound", "Lighting", "LED / Video"],
   },
   {
     title: "Branding & Design",
-    desc: "Event identity, key visuals and environments that carry the brand consistently through the entire space.",
+    desc: "Event identity, key visuals and spaces that keep the brand consistent everywhere people look.",
     img: "/gallery/04.jpg",
     tags: ["Identity", "Key visuals", "Signage"],
   },
   {
     title: "Concept to Execution",
-    desc: "The whole arc, one partner: idea, creative, budget, build and the flawless night itself.",
+    desc: "The whole thing, one partner: idea, creative, budget, build and the night itself.",
     img: "/gallery/02.jpg",
     tags: ["Strategy", "Creative", "Delivery"],
   },
@@ -67,7 +67,7 @@ export default function Services() {
           <Reveal delay={0.1}>
             <p className="max-w-xs text-ink-2">
               Tap any service to see it in action. Take one, or hand us the
-              whole event; either way it stays in one pair of hands.
+              whole event. Either way it stays with one team.
             </p>
           </Reveal>
         </div>

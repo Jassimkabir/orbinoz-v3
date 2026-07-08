@@ -8,12 +8,12 @@ import {
   useTransform,
   useReducedMotion,
 } from 'framer-motion';
-import { ArrowRight01Icon } from '@hugeicons/core-free-icons';
+import { ArrowRight01Icon, ArrowDown01Icon } from '@hugeicons/core-free-icons';
 import { AnimatedHeading } from './motion';
 import { Icon } from './ui/hugeicon';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const INTERVAL = 4800;
+const INTERVAL = 5200;
 
 const SLIDES = [
   {
@@ -39,20 +39,19 @@ const SLIDES = [
 ];
 
 export default function Hero() {
-  const stageRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
 
-  // Scroll progress across the tall stage → drives the expand-to-fullscreen.
+  // Scroll-linked parallax as the hero leaves the viewport (rides Lenis).
   const { scrollYProgress } = useScroll({
-    target: stageRef,
-    offset: ['start start', 'end end'],
+    target: sectionRef,
+    offset: ['start start', 'end start'],
   });
-  const p = useTransform(scrollYProgress, [0, 0.62], [0, 1]);
-  const width = useTransform(p, [0, 1], ['86vw', '100vw']);
-  const height = useTransform(p, [0, 1], ['66vh', '100vh']);
-  const radius = useTransform(p, [0, 1], [24, 0]);
-  const captionOpacity = useTransform(p, [0.25, 0.6], [0, 1]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.18]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '14%']);
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '-22%']);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   useEffect(() => {
     if (reduce) return;
@@ -64,149 +63,171 @@ export default function Hero() {
   }, [reduce]);
 
   return (
-    <section id='home' className='relative'>
-      {/* Editorial intro (normal flow) */}
-      <div className='mx-auto max-w-[1440px] px-5 pt-36 sm:px-8 sm:pt-44'>
-        <div className='grid gap-8 lg:grid-cols-12 lg:items-end'>
-          <div className='lg:col-span-9'>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: EASE, delay: 0.3 }}
-              className='eyebrow'
-            >
-              Corporate event studio, Kochi
-            </motion.p>
-            <h1 className='mt-7 font-display text-[clamp(2.7rem,7.4vw,6.6rem)] font-light leading-[0.98] tracking-[-0.03em] text-ink'>
-              <AnimatedHeading text='Moments engineered' />
-              <br />
-              <AnimatedHeading
-                text='to feel inevitable.'
-                delay={0.15}
-                wordClassName={(w) =>
-                  w.startsWith('inevitable') ? 'italic text-accent' : ''
-                }
-              />
-            </h1>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: EASE, delay: 0.9 }}
-            className='lg:col-span-3'
-          >
-            <p className='max-w-xs text-[1.05rem] leading-relaxed text-ink-2'>
-              We design, produce and run corporate events from the first idea to
-              the final cue.
-            </p>
-            <div className='mt-7 flex flex-wrap items-center gap-4'>
-              <a
-                href='#gallery'
-                className='group inline-flex items-center gap-1.5 text-[0.95rem] font-medium text-ink'
-              >
-                <span className='link-underline'>See our work</span>
-                <Icon
-                  icon={ArrowRight01Icon}
-                  size={16}
-                  className='transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1'
-                />
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Scroll-expand slideshow stage */}
-      <div
-        ref={stageRef}
-        className={`relative mt-14 sm:mt-16 ${reduce ? '' : 'h-[220vh]'}`}
+    <section
+      id='home'
+      ref={sectionRef}
+      className='relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-ink'
+    >
+      {/* Slideshow background */}
+      <motion.div
+        style={reduce ? undefined : { scale: bgScale, y: bgY }}
+        className='absolute inset-0'
       >
-        <div
-          className={`flex items-center justify-center overflow-hidden ${
-            reduce ? 'px-5 sm:px-8' : 'sticky top-0 h-screen'
-          }`}
-        >
+        <AnimatePresence>
           <motion.div
-            style={reduce ? undefined : { width, height, borderRadius: radius }}
-            className={`relative overflow-hidden ${
-              reduce ? 'aspect-[16/9] w-full rounded-2xl md:aspect-[21/9]' : ''
-            }`}
+            key={index}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.4, ease: EASE }}
+            className='absolute inset-0'
           >
-            {/* Crossfade slideshow */}
-            <AnimatePresence>
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.2, ease: EASE }}
-                className='absolute inset-0'
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <motion.img
-                  src={SLIDES[index].src}
-                  alt={SLIDES[index].heading}
-                  initial={{ scale: reduce ? 1 : 1.05 }}
-                  animate={{ scale: reduce ? 1 : 1.14 }}
-                  transition={{
-                    duration: INTERVAL / 1000 + 1.5,
-                    ease: 'linear',
-                  }}
-                  className='h-full w-full object-cover'
-                />
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Legibility gradient */}
-            <div className='pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-ink/20' />
-
-            {/* Per-slide heading */}
-            <motion.div
-              style={reduce ? undefined : { opacity: captionOpacity }}
-              className='absolute inset-0 flex items-end p-6 sm:p-12 lg:p-16'
-            >
-              <AnimatePresence mode='wait'>
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -16 }}
-                  transition={{ duration: 0.7, ease: EASE }}
-                  className='max-w-2xl text-paper'
-                >
-                  <p className='text-xs font-medium uppercase tracking-[0.2em] text-paper/70 sm:text-sm'>
-                    {SLIDES[index].kicker}
-                  </p>
-                  <h2 className='mt-3 font-display text-[clamp(1.8rem,5vw,4.5rem)] font-light leading-[1] tracking-[-0.02em]'>
-                    {SLIDES[index].heading}
-                  </h2>
-                </motion.div>
-              </AnimatePresence>
-            </motion.div>
-
-            {/* Indicators */}
-            <div className='absolute bottom-6 right-6 z-10 flex gap-2.5 sm:bottom-10 sm:right-12'>
-              {SLIDES.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setIndex(i)}
-                  aria-label={`Show slide ${i + 1}`}
-                  className='group flex h-6 items-center'
-                >
-                  <span
-                    className={`block h-1.5 rounded-sm transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                      i === index
-                        ? 'w-8 bg-paper'
-                        : 'w-1.5 bg-paper/50 group-hover:bg-paper/80'
-                    }`}
-                  />
-                </button>
-              ))}
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <motion.img
+              src={SLIDES[index].src}
+              alt={SLIDES[index].heading}
+              initial={{ scale: reduce ? 1 : 1.06 }}
+              animate={{ scale: reduce ? 1 : 1.16 }}
+              transition={{ duration: INTERVAL / 1000 + 1.6, ease: 'linear' }}
+              className='h-full w-full object-cover'
+            />
           </motion.div>
+        </AnimatePresence>
+      </motion.div>
+
+      {/* Legibility scrims: overall tint, soft at top for the nav, heavy at base */}
+      <div className='pointer-events-none absolute inset-0 bg-ink/30' />
+      <div className='pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/60 via-transparent to-transparent' />
+      <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,var(--color-ink)_0%,rgba(22,21,15,0.55)_42%,transparent_78%)]' />
+
+      {/* Content */}
+      <motion.div
+        style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
+        className='relative z-10 mx-auto flex h-full max-w-[1440px] flex-col px-5 sm:px-8'
+      >
+        {/* Bottom cluster */}
+        <div className='mt-auto pb-14 sm:pb-16'>
+          <div className='flex flex-col gap-11 lg:flex-row lg:items-end lg:justify-between lg:gap-16'>
+            {/* Headline + actions */}
+            <div className='max-w-4xl'>
+              {/* Eyebrow, just above the headline */}
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: EASE, delay: 0.15 }}
+                className='mb-6 flex items-center gap-2.5 text-[0.74rem] font-medium uppercase tracking-[0.16em] text-paper/70'
+              >
+                Corporate event studio, Kochi
+              </motion.p>
+              <h1 className='font-display text-[clamp(2.9rem,8vw,7rem)] font-light leading-[0.96] tracking-[-0.03em] text-paper'>
+                <AnimatedHeading text='Moments engineered' delay={0.15} />
+                <br />
+                <AnimatedHeading
+                  text='to feel inevitable.'
+                  delay={0.3}
+                  wordClassName={(w) =>
+                    w.startsWith('inevitable')
+                      ? 'italic text-accent-bright'
+                      : ''
+                  }
+                />
+              </h1>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, ease: EASE, delay: 0.75 }}
+                className='mt-8 flex flex-col items-start gap-5'
+              >
+                <p className='max-w-md text-[1.05rem] leading-relaxed text-paper/75'>
+                  We plan, produce and run corporate events, start to finish.
+                </p>
+                <div className='flex flex-wrap items-center gap-6'>
+                  <a
+                    href='#gallery'
+                    className='group inline-flex items-center gap-1.5 text-sm font-medium text-paper'
+                  >
+                    <span className='link-underline'>See our work</span>
+                    <Icon
+                      icon={ArrowRight01Icon}
+                      size={15}
+                      className='transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1'
+                    />
+                  </a>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Slide meta + indicators */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: EASE, delay: 0.95 }}
+              className='shrink-0 lg:w-56 lg:text-right'
+            >
+              <div className='h-5 overflow-hidden'>
+                <AnimatePresence mode='wait'>
+                  <motion.p
+                    key={index}
+                    initial={{ y: '110%' }}
+                    animate={{ y: '0%' }}
+                    exit={{ y: '-110%' }}
+                    transition={{ duration: 0.6, ease: EASE }}
+                    className='text-xs font-medium uppercase tracking-[0.2em] text-paper/60'
+                  >
+                    {SLIDES[index].kicker}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
+
+              <div className='mt-4 flex items-center gap-2.5 lg:justify-end'>
+                {SLIDES.map((s, i) => (
+                  <button
+                    key={s.src}
+                    onClick={() => setIndex(i)}
+                    aria-label={`Show ${s.kicker}`}
+                    className='group py-2'
+                  >
+                    <span className='block h-[3px] w-9 overflow-hidden rounded-sm bg-paper/25'>
+                      {i === index ? (
+                        <motion.span
+                          key={index}
+                          initial={{ scaleX: reduce ? 1 : 0 }}
+                          animate={{ scaleX: 1 }}
+                          transition={{
+                            duration: reduce ? 0 : INTERVAL / 1000,
+                            ease: 'linear',
+                          }}
+                          className='block h-full w-full origin-left bg-paper'
+                        />
+                      ) : (
+                        <span className='block h-full w-0 bg-paper transition-[width] duration-500 group-hover:w-full' />
+                      )}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </div>
+      </motion.div>
+
+      {/* Scroll cue */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, ease: EASE, delay: 1.2 }}
+        style={reduce ? undefined : { opacity: contentOpacity }}
+        className='pointer-events-none absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 sm:block'
+      >
+        <motion.div
+          animate={reduce ? undefined : { y: [0, 7, 0] }}
+          transition={{ duration: 2, ease: 'easeInOut', repeat: Infinity }}
+          className='text-paper/50'
+        >
+          <Icon icon={ArrowDown01Icon} size={22} />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

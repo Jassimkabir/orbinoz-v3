@@ -5,7 +5,7 @@ import type { Logo } from "./logo-carousel";
  * Real Orbinoz client logos from /public/logos (1.png … 17.png).
  *
  * The LogoCarousel types each logo's `img` as an SVG component, but only passes
- * a `className` down — so we wrap each PNG in a tiny component that forwards that
+ * a `className` down, so we wrap each PNG in a tiny component that forwards that
  * className to an <img>. object-contain (from the carousel) keeps the 2:1 art
  * centered inside the square slot.
  */

@@ -73,8 +73,8 @@ export default function Contact() {
           </h2>
           <Reveal delay={0.12}>
             <p className='mt-7 max-w-md text-lg leading-relaxed text-ink-2'>
-              Tell us what you&apos;re planning. We reply to every brief
-              personally, usually within one business day.
+              Tell us what you&apos;re planning. We read every brief ourselves
+              and usually get back to you within a day.
             </p>
           </Reveal>
 
@@ -177,11 +177,11 @@ export default function Contact() {
                 className='text-accent'
               />
               <h3 className='font-display text-4xl font-light text-ink'>
-                Brief received.
+                Thanks, we&apos;ve got it.
               </h3>
               <p className='max-w-sm text-ink-2'>
-                It&apos;s with the team. Expect a personal reply from Orbinoz
-                within one business day.
+                Your brief is with the team. We&apos;ll get back to you
+                personally within a day.
               </p>
             </div>
           ) : (

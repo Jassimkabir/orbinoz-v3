@@ -41,6 +41,7 @@ export default function Nav() {
 
   const close = () => setOpen(false);
   const linksBase = 0.3; // links reveal after the panel has mostly opened
+  const light = !solid && !open; // light-on-transparent while over the hero
 
   return (
     <>
@@ -66,9 +67,9 @@ export default function Nav() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src='/icons/logo-black.webp'
+              src={light ? '/icons/logo-white.webp' : '/icons/logo-black.webp'}
               alt='Orbinoz'
-              className='h-8 w-auto sm:h-9'
+              className='h-8 w-auto transition-opacity duration-300 sm:h-9'
             />
           </a>
 
@@ -77,12 +78,21 @@ export default function Nav() {
               <a
                 key={l.id}
                 href={l.id}
-                className='link-underline text-[0.95rem] text-ink-2 transition-colors hover:text-ink'
+                className={`link-underline text-[0.95rem] transition-colors duration-300 ${
+                  light
+                    ? 'text-paper/85 hover:text-paper'
+                    : 'text-ink-2 hover:text-ink'
+                }`}
               >
                 {l.label}
               </a>
             ))}
-            <a href='#contact' className='btn-solid !py-2.5 !text-sm'>
+            <a
+              href='#contact'
+              className={`inline-flex items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm font-medium transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:bg-accent hover:text-white ${
+                light ? 'bg-paper text-ink' : 'bg-ink text-paper'
+              }`}
+            >
               Get in touch
               <Icon icon={ArrowRight01Icon} size={16} />
             </a>
@@ -95,23 +105,23 @@ export default function Nav() {
             transition={{ duration: 0.2, ease: EASE }}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
-            className='-mr-1.5 flex h-10 w-10 flex-col items-center justify-center gap-1.5 text-ink md:hidden'
+            className='-mr-1.5 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden'
           >
             <span
-              className={`h-px w-6 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                open ? 'translate-y-[3.5px] rotate-45' : ''
-              }`}
+              className={`h-px w-6 transition-[transform,background-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                light ? 'bg-paper' : 'bg-ink'
+              } ${open ? 'translate-y-[3.5px] rotate-45' : ''}`}
             />
             <span
-              className={`h-px w-6 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                open ? '-translate-y-[3.5px] -rotate-45' : ''
-              }`}
+              className={`h-px w-6 transition-[transform,background-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                light ? 'bg-paper' : 'bg-ink'
+              } ${open ? '-translate-y-[3.5px] -rotate-45' : ''}`}
             />
           </motion.button>
         </nav>
       </motion.header>
 
-      {/* Menu panel — expands from the top, seamless with the header */}
+      {/* Menu panel: expands from the top, seamless with the header */}
       <AnimatePresence>
         {open && (
           <motion.div

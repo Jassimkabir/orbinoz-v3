@@ -45,7 +45,7 @@ export default function Gallery() {
           </div>
           <Reveal delay={0.1}>
             <p className="hidden max-w-[15rem] text-right text-sm text-muted sm:block">
-              A selection of recent productions. Full portfolio on request.
+              A few recent productions. Ask us for the full portfolio.
             </p>
           </Reveal>
         </div>

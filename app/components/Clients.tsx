@@ -1,30 +1,14 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import { Reveal } from './motion';
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-} from '@/components/ui/carousel';
-import { clientLogos } from '@/components/ui/client-logos';
+import { LogoCloud } from '@/components/ui/logo-cloud-3';
+
+const logos = Array.from({ length: 17 }, (_, i) => ({
+  src: `/logos/${i + 1}.png`,
+  alt: `Client ${i + 1}`,
+}));
 
 export default function Clients() {
-  const [api, setApi] = useState<CarouselApi>();
-  const paused = useRef(false);
-
-  // Gentle auto-advance; loops seamlessly and pauses on hover / reduced-motion.
-  useEffect(() => {
-    if (!api) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const id = setInterval(() => {
-      if (!paused.current) api.scrollNext();
-    }, 2200);
-    return () => clearInterval(id);
-  }, [api]);
-
   return (
     <section
       id='clients'
@@ -59,39 +43,9 @@ export default function Clients() {
           </div>
         </div>
 
-        {/* Auto-scrolling logo carousel */}
-        <Reveal delay={0.12} className='mt-14'>
-          <div
-            className='relative'
-            onMouseEnter={() => (paused.current = true)}
-            onMouseLeave={() => (paused.current = false)}
-          >
-            <Carousel
-              setApi={setApi}
-              opts={{ loop: true, align: 'start', dragFree: true }}
-              className='w-full'
-            >
-              <CarouselContent>
-                {clientLogos.map((logo) => {
-                  const LogoMark = logo.img;
-                  return (
-                    <CarouselItem
-                      key={logo.id}
-                      className='basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6'
-                    >
-                      <div className='group flex h-24 items-center justify-center rounded-xl border border-line bg-card/50 px-5 transition-colors duration-500 hover:bg-card'>
-                        <LogoMark className='max-h-10 w-auto max-w-[80%] object-contain transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 sm:max-h-12' />
-                      </div>
-                    </CarouselItem>
-                  );
-                })}
-              </CarouselContent>
-            </Carousel>
-
-            {/* Edge fades */}
-            <div className='pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-paper to-transparent sm:w-20' />
-            <div className='pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-paper to-transparent sm:w-20' />
-          </div>
+        {/* Auto-scrolling logo marquee */}
+        <Reveal delay={0.12} className='mt-16'>
+          <LogoCloud logos={logos} />
         </Reveal>
       </div>
     </section>
