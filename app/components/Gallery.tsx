@@ -1,12 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { m, AnimatePresence } from "framer-motion";
 import { Cancel01Icon, ArrowLeft01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import { Reveal } from "./motion";
 import { Icon } from "./ui/hugeicon";
+import { img } from "@/lib/images";
 
-const IMAGES = Array.from({ length: 13 }, (_, i) => `/gallery/${String(i + 1).padStart(2, "0")}.jpg`);
+const PATHS = Array.from({ length: 13 }, (_, i) => `/gallery/${String(i + 1).padStart(2, "0")}.jpg`);
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -16,7 +18,7 @@ export default function Gallery() {
   const close = useCallback(() => setOpen(null), []);
   const step = useCallback(
     (dir: number) =>
-      setOpen((cur) => (cur === null ? cur : (cur + dir + IMAGES.length) % IMAGES.length)),
+      setOpen((cur) => (cur === null ? cur : (cur + dir + PATHS.length) % PATHS.length)),
     []
   );
 
@@ -51,8 +53,8 @@ export default function Gallery() {
         </div>
 
         <div className="columns-2 gap-4 md:columns-3 lg:columns-4 [&>*]:mb-4">
-          {IMAGES.map((src, i) => (
-            <motion.button
+          {PATHS.map((src, i) => (
+            <m.button
               key={src}
               onClick={() => setOpen(i)}
               initial={{ opacity: 0, y: 24 }}
@@ -61,14 +63,14 @@ export default function Gallery() {
               transition={{ duration: 0.7, ease: EASE, delay: (i % 4) * 0.06 }}
               className="group block w-full overflow-hidden rounded-xl"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={src}
+              <Image
+                src={img(src)}
                 alt="Orbinoz event"
-                loading="lazy"
-                className="w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                placeholder="blur"
+                className="h-auto w-full transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
               />
-            </motion.button>
+            </m.button>
           ))}
         </div>
       </div>
@@ -76,7 +78,7 @@ export default function Gallery() {
       {/* Lightbox */}
       <AnimatePresence>
         {open !== null && (
-          <motion.div
+          <m.div
             data-lenis-prevent
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -108,23 +110,27 @@ export default function Gallery() {
             </button>
 
             <AnimatePresence mode="wait">
-              <motion.img
+              <m.div
                 key={open}
-                src={IMAGES[open]}
-                alt="Orbinoz event"
                 onClick={(e) => e.stopPropagation()}
                 initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.99 }}
                 transition={{ duration: 0.35, ease: EASE }}
-                className="max-h-[85vh] max-w-[90vw] rounded-lg object-contain"
-              />
+              >
+                <Image
+                  src={img(PATHS[open])}
+                  alt="Orbinoz event"
+                  sizes="90vw"
+                  className="h-auto max-h-[85vh] w-auto max-w-[90vw] rounded-lg object-contain"
+                />
+              </m.div>
             </AnimatePresence>
 
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-sm text-paper/70">
-              {open + 1} / {IMAGES.length}
+              {open + 1} / {PATHS.length}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </section>

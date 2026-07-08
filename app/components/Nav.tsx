@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { m, AnimatePresence } from 'framer-motion';
 import {
   ArrowRight01Icon,
   ArrowUpRight01Icon,
@@ -11,6 +12,7 @@ import {
   Facebook01Icon,
 } from '@hugeicons/core-free-icons';
 import { Icon } from './ui/hugeicon';
+import { LOGO_BLACK, LOGO_WHITE } from '@/lib/images';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -46,7 +48,7 @@ export default function Nav() {
   return (
     <>
       {/* Header stays on top; the menu grows out from underneath it */}
-      <motion.header
+      <m.header
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
@@ -65,10 +67,11 @@ export default function Nav() {
             aria-label='Orbinoz, home'
             className='flex items-center'
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={light ? '/icons/logo-white.webp' : '/icons/logo-black.webp'}
+            <Image
+              src={light ? LOGO_WHITE : LOGO_BLACK}
               alt='Orbinoz'
+              loading='eager'
+              sizes='150px'
               className='h-8 w-auto transition-opacity duration-300 sm:h-9'
             />
           </a>
@@ -99,7 +102,7 @@ export default function Nav() {
           </div>
 
           {/* Hamburger that morphs into an X in place */}
-          <motion.button
+          <m.button
             onClick={() => setOpen((v) => !v)}
             whileTap={{ scale: 0.86 }}
             transition={{ duration: 0.2, ease: EASE }}
@@ -117,14 +120,14 @@ export default function Nav() {
                 light ? 'bg-paper' : 'bg-ink'
               } ${open ? '-translate-y-[3.5px] -rotate-45' : ''}`}
             />
-          </motion.button>
+          </m.button>
         </nav>
-      </motion.header>
+      </m.header>
 
       {/* Menu panel: expands from the top, seamless with the header */}
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             key='menu'
             data-lenis-prevent
             initial={{ clipPath: 'inset(0% 0% 100% 0%)' }}
@@ -139,7 +142,7 @@ export default function Nav() {
             <nav className='flex flex-1 flex-col justify-center gap-1 px-6'>
               {LINKS.map((l, i) => (
                 <div key={l.id} className='overflow-hidden py-1'>
-                  <motion.a
+                  <m.a
                     href={l.id}
                     onClick={close}
                     initial={{ y: '115%' }}
@@ -153,11 +156,11 @@ export default function Nav() {
                     className='block font-display text-[3.4rem] font-light leading-[1.1] tracking-[-0.01em] text-ink transition-colors hover:text-accent'
                   >
                     {l.label}
-                  </motion.a>
+                  </m.a>
                 </div>
               ))}
 
-              <motion.a
+              <m.a
                 href='#contact'
                 onClick={close}
                 initial={{ opacity: 0, y: 18 }}
@@ -172,10 +175,10 @@ export default function Nav() {
               >
                 Get in touch
                 <Icon icon={ArrowUpRight01Icon} size={16} />
-              </motion.a>
+              </m.a>
             </nav>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, transition: { duration: 0.15 } }}
@@ -200,8 +203,8 @@ export default function Nav() {
                   </a>
                 ))}
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

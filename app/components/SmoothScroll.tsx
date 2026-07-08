@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
-import { MotionConfig } from "framer-motion";
+import { LazyMotion, MotionConfig, domMax } from "framer-motion";
 
 /**
  * Global Lenis smooth scrolling. Runs its own rAF loop and handles smooth
@@ -53,5 +53,11 @@ export default function SmoothScroll({
     };
   }, []);
 
-  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
+  // LazyMotion + `m` components ship a much smaller motion runtime; `domMax`
+  // covers every feature we use (animations, gestures, whileInView, layout).
+  return (
+    <LazyMotion features={domMax} strict>
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    </LazyMotion>
+  );
 }

@@ -2,15 +2,17 @@
 
 import { useEffect, useRef, useState } from 'react';
 import {
-  motion,
+  m,
   AnimatePresence,
   useScroll,
   useTransform,
   useReducedMotion,
 } from 'framer-motion';
+import Image from 'next/image';
 import { ArrowRight01Icon, ArrowDown01Icon } from '@hugeicons/core-free-icons';
 import { AnimatedHeading } from './motion';
 import { Icon } from './ui/hugeicon';
+import { img } from '@/lib/images';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const INTERVAL = 5200;
@@ -69,12 +71,12 @@ export default function Hero() {
       className='relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-ink'
     >
       {/* Slideshow background */}
-      <motion.div
+      <m.div
         style={reduce ? undefined : { scale: bgScale, y: bgY }}
         className='absolute inset-0'
       >
         <AnimatePresence>
-          <motion.div
+          <m.div
             key={index}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -82,18 +84,26 @@ export default function Hero() {
             transition={{ duration: 1.4, ease: EASE }}
             className='absolute inset-0'
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <motion.img
-              src={SLIDES[index].src}
-              alt={SLIDES[index].heading}
+            {/* Ken Burns on a wrapper so <Image fill> can optimize the photo */}
+            <m.div
               initial={{ scale: reduce ? 1 : 1.06 }}
               animate={{ scale: reduce ? 1 : 1.16 }}
               transition={{ duration: INTERVAL / 1000 + 1.6, ease: 'linear' }}
-              className='h-full w-full object-cover'
-            />
-          </motion.div>
+              className='absolute inset-0'
+            >
+              <Image
+                src={img(SLIDES[index].src)}
+                alt={SLIDES[index].heading}
+                fill
+                preload={index === 0}
+                sizes='100vw'
+                placeholder='blur'
+                className='object-cover'
+              />
+            </m.div>
+          </m.div>
         </AnimatePresence>
-      </motion.div>
+      </m.div>
 
       {/* Legibility scrims: overall tint, soft at top for the nav, heavy at base */}
       <div className='pointer-events-none absolute inset-0 bg-ink/30' />
@@ -101,7 +111,7 @@ export default function Hero() {
       <div className='pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,var(--color-ink)_0%,rgba(22,21,15,0.55)_42%,transparent_78%)]' />
 
       {/* Content */}
-      <motion.div
+      <m.div
         style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
         className='relative z-10 mx-auto flex h-full max-w-[1440px] flex-col px-5 sm:px-8'
       >
@@ -111,14 +121,14 @@ export default function Hero() {
             {/* Headline + actions */}
             <div className='max-w-4xl'>
               {/* Eyebrow, just above the headline */}
-              <motion.p
+              <m.p
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: EASE, delay: 0.15 }}
                 className='mb-6 flex items-center gap-2.5 text-[0.74rem] font-medium uppercase tracking-[0.16em] text-paper/70'
               >
                 Corporate event studio, Kochi
-              </motion.p>
+              </m.p>
               <h1 className='font-display text-[clamp(2.9rem,8vw,7rem)] font-light leading-[0.96] tracking-[-0.03em] text-paper'>
                 <AnimatedHeading text='Moments engineered' delay={0.15} />
                 <br />
@@ -133,7 +143,7 @@ export default function Hero() {
                 />
               </h1>
 
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: EASE, delay: 0.75 }}
@@ -155,11 +165,11 @@ export default function Hero() {
                     />
                   </a>
                 </div>
-              </motion.div>
+              </m.div>
             </div>
 
             {/* Slide meta + indicators */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: EASE, delay: 0.95 }}
@@ -167,7 +177,7 @@ export default function Hero() {
             >
               <div className='h-5 overflow-hidden'>
                 <AnimatePresence mode='wait'>
-                  <motion.p
+                  <m.p
                     key={index}
                     initial={{ y: '110%' }}
                     animate={{ y: '0%' }}
@@ -176,7 +186,7 @@ export default function Hero() {
                     className='text-xs font-medium uppercase tracking-[0.2em] text-paper/60'
                   >
                     {SLIDES[index].kicker}
-                  </motion.p>
+                  </m.p>
                 </AnimatePresence>
               </div>
 
@@ -186,11 +196,11 @@ export default function Hero() {
                     key={s.src}
                     onClick={() => setIndex(i)}
                     aria-label={`Show ${s.kicker}`}
-                    className='group py-2'
+                    className='group flex h-11 items-center py-2'
                   >
                     <span className='block h-[3px] w-9 overflow-hidden rounded-sm bg-paper/25'>
                       {i === index ? (
-                        <motion.span
+                        <m.span
                           key={index}
                           initial={{ scaleX: reduce ? 1 : 0 }}
                           animate={{ scaleX: 1 }}
@@ -207,27 +217,27 @@ export default function Hero() {
                   </button>
                 ))}
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Scroll cue */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, ease: EASE, delay: 1.2 }}
         style={reduce ? undefined : { opacity: contentOpacity }}
         className='pointer-events-none absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 sm:block'
       >
-        <motion.div
+        <m.div
           animate={reduce ? undefined : { y: [0, 7, 0] }}
           transition={{ duration: 2, ease: 'easeInOut', repeat: Infinity }}
           className='text-paper/50'
         >
           <Icon icon={ArrowDown01Icon} size={22} />
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </section>
   );
 }

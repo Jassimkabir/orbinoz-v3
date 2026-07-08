@@ -1,8 +1,10 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
+import { m, useScroll, useTransform } from 'framer-motion';
 import { Reveal } from './motion';
+import { img } from '@/lib/images';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -20,7 +22,7 @@ export default function Founder() {
         <div className='grid items-center gap-12 lg:grid-cols-12 lg:gap-14'>
           {/* Portrait: clipped at the bottom, head crests the frame */}
           <div className='lg:col-span-4'>
-            <motion.div
+            <m.div
               ref={frame}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -36,16 +38,17 @@ export default function Founder() {
 
               {/* Image: open at the top, clipped (rounded) at the bottom */}
               <div className='absolute inset-x-0 bottom-0 -top-[28%] overflow-hidden rounded-b-[1.75rem]'>
-                <motion.div style={{ y: imgY }} className='absolute inset-0'>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src='/founder-cutout.webp'
+                <m.div style={{ y: imgY }} className='absolute inset-0'>
+                  <Image
+                    src={img('/founder-cutout.webp')}
                     alt='Amal Roy Paul, Managing Director of Orbinoz Event Planners'
-                    className='absolute bottom-[-3%] left-1/2 w-[94%] max-w-none -translate-x-1/2'
+                    sizes='(max-width: 640px) 240px, 288px'
+                    placeholder='blur'
+                    className='absolute bottom-[-3%] left-1/2 h-auto w-[94%] max-w-none -translate-x-1/2'
                   />
-                </motion.div>
+                </m.div>
               </div>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Note */}

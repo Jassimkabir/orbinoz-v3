@@ -2,11 +2,9 @@
 
 import { Reveal } from './motion';
 import { LogoCloud } from '@/components/ui/logo-cloud-3';
+import { LOGOS } from '@/lib/images';
 
-const logos = Array.from({ length: 17 }, (_, i) => ({
-  src: `/logos/${i + 1}.png`,
-  alt: `Client ${i + 1}`,
-}));
+const logos = LOGOS.map((src, i) => ({ src, alt: `Client ${i + 1}` }));
 
 export default function Clients() {
   return (

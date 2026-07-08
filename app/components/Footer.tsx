@@ -8,8 +8,10 @@ import {
   WhatsappIcon,
   Facebook01Icon,
 } from '@hugeicons/core-free-icons';
+import Image from 'next/image';
 import { Reveal, AnimatedHeading } from './motion';
 import { Icon } from './ui/hugeicon';
+import { LOGO_WHITE } from '@/lib/images';
 
 const NAV = [
   { label: 'About', href: '#about' },
@@ -123,10 +125,10 @@ export default function Footer() {
       <div className='relative mx-auto max-w-[1440px] px-5 pb-9 sm:px-8'>
         <div className='flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 text-xs text-paper/40 sm:flex-row'>
           <p>© {new Date().getFullYear()} Orbinoz Event Planners Pvt. Ltd.</p>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src='/icons/logo-white.webp'
+          <Image
+            src={LOGO_WHITE}
             alt='Orbinoz'
+            sizes='120px'
             className='h-5 w-auto opacity-80'
           />
           <p>Kochi · Kerala · India</p>

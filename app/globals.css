@@ -29,12 +29,17 @@
 
 html {
   scroll-behavior: auto;
+  /* Stop iOS from inflating text on orientation change. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  /* Remove the grey tap flash on touch. */
+  -webkit-tap-highlight-color: transparent;
   font-weight: 400;
   line-height: 1.6;
   overflow-x: hidden;
@@ -60,6 +65,21 @@ html.lenis body {
 ::selection {
   background: var(--color-ink);
   color: var(--color-paper);
+}
+
+/* Keep form controls at 16px so iOS Safari doesn't zoom the page on focus. */
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
+/* Media never forces horizontal overflow on small screens. */
+img,
+picture,
+video,
+iframe {
+  max-width: 100%;
 }
 
 /* ---- Type ---- */

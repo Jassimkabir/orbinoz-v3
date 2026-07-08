@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { m, AnimatePresence } from "framer-motion";
 import { PlusSignIcon } from "@hugeicons/core-free-icons";
 import { Reveal } from "./motion";
 import { Icon } from "./ui/hugeicon";
+import { img } from "@/lib/images";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -90,7 +92,7 @@ export default function Services() {
                   >
                     {s.title}
                   </h3>
-                  <motion.span
+                  <m.span
                     animate={{ rotate: open ? 45 : 0 }}
                     transition={{ duration: 0.35, ease: EASE }}
                     className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border transition-colors duration-300 ${
@@ -100,12 +102,12 @@ export default function Services() {
                     }`}
                   >
                     <Icon icon={PlusSignIcon} size={18} />
-                  </motion.span>
+                  </m.span>
                 </button>
 
                 <AnimatePresence initial={false}>
                   {open && (
-                    <motion.div
+                    <m.div
                       key="content"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
@@ -118,14 +120,21 @@ export default function Services() {
                     >
                       <div className="grid gap-6 pb-9 md:grid-cols-[1.1fr_1fr] md:items-center md:gap-12">
                         <div className="relative aspect-[16/10] overflow-hidden rounded-xl">
-                          <motion.img
-                            src={s.img}
-                            alt={s.title}
+                          <m.div
                             initial={{ scale: 1.12 }}
                             animate={{ scale: 1 }}
                             transition={{ duration: 0.9, ease: EASE }}
-                            className="h-full w-full object-cover"
-                          />
+                            className="absolute inset-0"
+                          >
+                            <Image
+                              src={img(s.img)}
+                              alt={s.title}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 45vw"
+                              placeholder="blur"
+                              className="object-cover"
+                            />
+                          </m.div>
                         </div>
                         <div>
                           <p className="text-lg leading-relaxed text-ink-2">
@@ -143,7 +152,7 @@ export default function Services() {
                           </div>
                         </div>
                       </div>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
               </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { m, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -28,7 +28,7 @@ export function Reveal({
   y?: number;
 }) {
   return (
-    <motion.div
+    <m.div
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -36,7 +36,7 @@ export function Reveal({
       transition={{ duration: 0.9, ease: EASE, delay }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -57,7 +57,7 @@ export function AnimatedHeading({
 }) {
   const words = text.split(" ");
   return (
-    <motion.span
+    <m.span
       className={className}
       style={{ display: "inline" }}
       initial="hidden"
@@ -78,7 +78,7 @@ export function AnimatedHeading({
             marginBottom: "-0.2em",
           }}
         >
-          <motion.span
+          <m.span
             style={{ display: "inline-block", willChange: "transform" }}
             className={wordClassName?.(w, i)}
             variants={{
@@ -87,10 +87,10 @@ export function AnimatedHeading({
             }}
           >
             {w}
-          </motion.span>
+          </m.span>
           {i < words.length - 1 ? " " : ""}
         </span>
       ))}
-    </motion.span>
+    </m.span>
   );
 }

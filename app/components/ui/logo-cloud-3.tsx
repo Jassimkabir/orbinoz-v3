@@ -1,11 +1,10 @@
+import Image, { type StaticImageData } from 'next/image';
 import { InfiniteSlider } from '@/components/ui/infinite-slider';
 import { cn } from '@/lib/utils';
 
 type Logo = {
-  src: string;
+  src: StaticImageData;
   alt: string;
-  width?: number;
-  height?: number;
 };
 
 type LogoCloudProps = React.ComponentProps<'div'> & {
@@ -23,15 +22,12 @@ export function LogoCloud({ className, logos, ...props }: LogoCloudProps) {
     >
       <InfiniteSlider gap={64} duration={40} durationOnHover={120}>
         {logos.map((logo) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             alt={logo.alt}
-            className='pointer-events-none h-10 w-auto select-none opacity-90 transition duration-500 hover:opacity-100 md:h-14'
-            height={logo.height || 'auto'}
             key={`logo-${logo.alt}`}
-            loading='lazy'
             src={logo.src}
-            width={logo.width || 'auto'}
+            sizes='160px'
+            className='pointer-events-none h-10 w-auto select-none opacity-90 transition duration-500 hover:opacity-100 md:h-14'
           />
         ))}
       </InfiniteSlider>
