@@ -1,13 +1,6 @@
 'use client';
 
-import { useRef, type SVGProps } from 'react';
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-  type MotionValue,
-} from 'framer-motion';
+import { type SVGProps } from 'react';
 import { Reveal } from './motion';
 import { GOOGLE_REVIEWS } from '@/lib/constants';
 
@@ -109,55 +102,23 @@ function ReviewCard({ r }: { r: Review }) {
   );
 }
 
-function Row({
-  items,
-  reverse,
-  drift,
-  duration,
-}: {
-  items: Review[];
-  reverse?: boolean;
-  drift?: MotionValue<string>;
-  duration: number;
-}) {
+function Row({ items, duration }: { items: Review[]; duration: number }) {
   return (
-    <motion.div style={drift ? { x: drift } : undefined}>
-      <div
-        className={`flex w-max gap-4 px-4 marquee-track sm:px-6 ${
-          reverse ? '[animation-direction:reverse]' : ''
-        }`}
-        style={{ animationDuration: `${duration}s` }}
-      >
-        {[...items, ...items].map((r, i) => (
-          <ReviewCard key={`${r.id}-${i}`} r={r} />
-        ))}
-      </div>
-    </motion.div>
+    <div
+      className='flex w-max gap-4 marquee-track'
+      style={{ animationDuration: `${duration}s` }}
+    >
+      {[...items, ...items].map((r, i) => (
+        <ReviewCard key={`${r.id}-${i}`} r={r} />
+      ))}
+    </div>
   );
 }
 
-const count = GOOGLE_REVIEWS.length;
-const avg = (GOOGLE_REVIEWS.reduce((s, r) => s + r.rating, 0) / count).toFixed(
-  1,
-);
-const half = Math.ceil(count / 2);
-const rowA = GOOGLE_REVIEWS.slice(0, half);
-const rowB = GOOGLE_REVIEWS.slice(half);
-
 export default function Reviews() {
-  const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion() ?? false;
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const driftA = useTransform(scrollYProgress, [0, 1], ['3%', '-5%']);
-  const driftB = useTransform(scrollYProgress, [0, 1], ['-3%', '5%']);
-
   return (
     <section
       id='reviews'
-      ref={ref}
       className='overflow-hidden bg-paper py-16 sm:py-20'
     >
       <div className='mx-auto max-w-[1440px] px-5 sm:px-8'>
@@ -171,21 +132,15 @@ export default function Reviews() {
         </Reveal>
       </div>
 
-      {/* Two-row marquee wall */}
-      <Reveal delay={0.05} className='relative mt-12'>
-        <div className='flex flex-col gap-4'>
-          <Row items={rowA} drift={reduce ? undefined : driftA} duration={64} />
-          <Row
-            items={rowB}
-            reverse
-            drift={reduce ? undefined : driftB}
-            duration={72}
-          />
-        </div>
+      {/* Single-row marquee — full-bleed on mobile, aligned to the container on sm+ */}
+      <div className='mx-auto mt-12 max-w-[1440px] sm:px-8'>
+        <Reveal delay={0.05} className='relative overflow-hidden py-6'>
+          <Row items={GOOGLE_REVIEWS} duration={70} />
 
-        <div className='pointer-events-none absolute inset-y-0 left-0 w-14 bg-gradient-to-r from-paper to-transparent sm:w-28' />
-        <div className='pointer-events-none absolute inset-y-0 right-0 w-14 bg-gradient-to-l from-paper to-transparent sm:w-28' />
-      </Reveal>
+          <div className='pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-paper to-transparent sm:w-20' />
+          <div className='pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-paper to-transparent sm:w-20' />
+        </Reveal>
+      </div>
     </section>
   );
 }
