@@ -13,39 +13,27 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const SERVICES = [
   {
     title: "Corporate Events",
-    desc: "Conferences, launches, town halls and celebrations, planned and run end to end so the day goes the way you briefed it.",
+    desc: "Full corporate event management, from concept to execution. Entertainment, best-in-class light and sound, AV and elegant stage sets that leave the room spellbound.",
     img: "/gallery/01.jpg",
-    tags: ["Planning", "Logistics", "On-site"],
+    tags: ["Conferences", "Product Launches", "Award Nights", "Dealer Meets"],
   },
   {
-    title: "Entertainment",
-    desc: "Artists, hosts and acts, picked and looked after so the right energy lands at the right moment of the night.",
-    img: "/gallery/09.jpg",
-    tags: ["Talent", "Curation", "Management"],
-  },
-  {
-    title: "Stage & Production",
-    desc: "Sets, scenography and show-calling, so the room moves exactly on cue every time.",
-    img: "/gallery/06.jpg",
-    tags: ["Scenography", "Rigging", "Show-call"],
-  },
-  {
-    title: "Audio-Visual",
-    desc: "Sound, lighting, LED and video. The technical side that stays out of the way and just works.",
-    img: "/gallery/10.jpg",
-    tags: ["Sound", "Lighting", "LED / Video"],
-  },
-  {
-    title: "Branding & Design",
-    desc: "Event identity, key visuals and spaces that keep the brand consistent everywhere people look.",
+    title: "Brand Activations",
+    desc: "Exhibitions and activations that put your product in its best light. Customised, target-oriented branding for launches, road shows and promotions.",
     img: "/gallery/04.jpg",
-    tags: ["Identity", "Key visuals", "Signage"],
+    tags: ["Exhibition Stalls", "Road Shows", "Promotions", "Displays"],
   },
   {
-    title: "Concept to Execution",
-    desc: "The whole thing, one partner: idea, creative, budget, build and the night itself.",
-    img: "/gallery/02.jpg",
-    tags: ["Strategy", "Creative", "Delivery"],
+    title: "Orbinoz Media",
+    desc: "Complete event media, from live coverage to post-event highlights. Corporate films, branded content, brand stories and photography that carry your message further.",
+    img: "/gallery/06.jpg",
+    tags: ["Corporate Films", "Photography", "Brand Stories", "Post-production"],
+  },
+  {
+    title: "Event Prop Up",
+    desc: "The gear and the talent, sorted. Light and sound, LED floors, live musicians, anchors and celebrities, with pricing and a personal touch that feel like family.",
+    img: "/gallery/10.jpg",
+    tags: ["Light & Sound", "LED Floor", "Musicians", "Anchors"],
   },
 ];
 
