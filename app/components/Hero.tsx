@@ -97,7 +97,6 @@ export default function Hero() {
                 fill
                 preload={index === 0}
                 sizes='100vw'
-                placeholder='blur'
                 className='object-cover'
               />
             </m.div>

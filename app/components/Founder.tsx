@@ -43,7 +43,6 @@ export default function Founder() {
                     src={img('/founder-cutout.webp')}
                     alt='Amal Roy Paul, Managing Director of Orbinoz Event Planners'
                     sizes='(max-width: 640px) 240px, 288px'
-                    placeholder='blur'
                     className='absolute bottom-[-3%] left-1/2 h-auto w-[94%] max-w-none -translate-x-1/2'
                   />
                 </m.div>
