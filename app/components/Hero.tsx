@@ -68,7 +68,7 @@ export default function Hero() {
     <section
       id='home'
       ref={sectionRef}
-      className='relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-ink'
+      className='theme-fixed-dark relative h-[100svh] min-h-[620px] w-full overflow-hidden bg-ink'
     >
       {/* Slideshow background */}
       <m.div

@@ -70,9 +70,17 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  colorScheme: "light",
-  themeColor: "#f6f4ef",
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f4ef" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0e0b" },
+  ],
 };
+
+// Runs synchronously during HTML parsing, before first paint, so the saved
+// theme is applied with no flash. Defaults to light when nothing is saved. See
+// Next's "preventing flash before hydration" guide.
+const themeScript = `(function(){try{var t=localStorage.getItem("theme")==="dark"?"dark":"light";var r=document.documentElement;r.dataset.theme=t;r.style.colorScheme=t}catch(e){}})()`;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -105,8 +113,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-theme="light"
+      suppressHydrationWarning
       className={`${display.variable} ${sans.variable} antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <script
           type="application/ld+json"
