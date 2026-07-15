@@ -11,6 +11,7 @@ import {
 import Image from 'next/image';
 import { Reveal, AnimatedHeading } from './motion';
 import { Icon } from './ui/hugeicon';
+import ThemeToggle from './ThemeToggle';
 import { LOGO_WHITE } from '@/lib/images';
 
 const NAV = [
@@ -47,7 +48,7 @@ const WHATSAPP_LINK = 'https://wa.me/919744458580';
 
 export default function Footer() {
   return (
-    <footer className='relative overflow-hidden bg-ink text-paper'>
+    <footer className='theme-fixed-dark relative overflow-hidden bg-ink text-paper'>
       {/* Ambient glow */}
       <div className='pointer-events-none absolute left-1/2 top-1/3 h-[60vh] w-[80vh] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(24,136,200,0.14),transparent_66%)] blur-3xl' />
 
@@ -99,6 +100,8 @@ export default function Footer() {
             ))}
           </nav>
           <div className='flex gap-2.5'>
+            <ThemeToggle />
+            <span className='mx-0.5 self-center h-6 w-px bg-white/12' aria-hidden />
             {SOCIALS.map((s) => (
               <a
                 key={s.label}

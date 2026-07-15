@@ -50,7 +50,7 @@ export default function Services() {
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-6 max-w-2xl font-display text-[clamp(2rem,4.4vw,3.4rem)] font-light leading-[1.05] tracking-[-0.02em] text-ink">
-                One studio, every discipline of the evening.
+                One studio for the whole event.
               </h2>
             </Reveal>
           </div>

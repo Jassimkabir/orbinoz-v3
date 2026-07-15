@@ -27,6 +27,80 @@
   color-scheme: light;
 }
 
+/* ---- Dark theme ----
+ * Utilities such as `bg-paper` / `text-ink` compile to `var(--color-*)`, so
+ * redefining the palette here re-skins the whole app. The toggle lives in the
+ * footer and flips `data-theme` on <html>. */
+[data-theme='dark'] {
+  --color-paper: #0f0e0b;
+  --color-paper-2: #16140f;
+  --color-card: #1e1b16;
+  --color-ink: #f4f1ea;
+  --color-ink-2: #b6b1a4;
+  --color-muted: #837f74;
+  --color-line: #2c2820;
+
+  /* Brand blue, lifted a touch so it stays legible on the dark surface. */
+  --color-accent: #3aabe6;
+  --color-accent-bright: #5cc0f5;
+  --color-accent-soft: #122a39;
+
+  --accent: #3aabe6;
+  --accent-bright: #5cc0f5;
+  --line: #2c2820;
+  color-scheme: dark;
+}
+
+/* Regions that sit over permanently dark imagery — the hero photos, the
+ * footer, the gallery lightbox — pin the light palette so they always render
+ * as a dark surface with light text, in either theme. */
+.theme-fixed-dark {
+  --color-paper: #f6f4ef;
+  --color-paper-2: #efece4;
+  --color-card: #ffffff;
+  --color-ink: #16150f;
+  --color-ink-2: #4b4940;
+  --color-muted: #8c887c;
+  --color-line: #e3ded2;
+  --color-accent: #1888c8;
+  --color-accent-bright: #3aabe6;
+  --color-accent-soft: #e6f3fb;
+}
+
+/* ---- Theme transition (View Transitions API) ----
+ * A smooth full-screen cross-fade between themes. ThemeToggle just swaps the
+ * theme inside startViewTransition; these animations do the rest. */
+@keyframes theme-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes theme-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+::view-transition-old(root) {
+  animation: theme-fade-out 0.5s var(--ease-out-expo) both;
+}
+::view-transition-new(root) {
+  animation: theme-fade-in 0.5s var(--ease-out-expo) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 html {
   scroll-behavior: auto;
   /* Stop iOS from inflating text on orientation change. */

@@ -12,6 +12,7 @@ import {
   Facebook01Icon,
 } from '@hugeicons/core-free-icons';
 import { Icon } from './ui/hugeicon';
+import { useTheme } from './useTheme';
 import { LOGO_BLACK, LOGO_WHITE } from '@/lib/images';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -41,9 +42,12 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const dark = useTheme() === 'dark';
   const close = () => setOpen(false);
   const linksBase = 0.3; // links reveal after the panel has mostly opened
   const light = !solid && !open; // light-on-transparent while over the hero
+  // White logo over the (always-dark) hero, and on the dark-theme surfaces.
+  const whiteLogo = light || dark;
 
   return (
     <>
@@ -68,7 +72,7 @@ export default function Nav() {
             className='flex items-center'
           >
             <Image
-              src={light ? LOGO_WHITE : LOGO_BLACK}
+              src={whiteLogo ? LOGO_WHITE : LOGO_BLACK}
               alt='Orbinoz'
               loading='eager'
               sizes='150px'
@@ -83,7 +87,7 @@ export default function Nav() {
                 href={l.id}
                 className={`link-underline text-[0.95rem] transition-colors duration-300 ${
                   light
-                    ? 'text-paper/85 hover:text-paper'
+                    ? 'text-white/85 hover:text-white'
                     : 'text-ink-2 hover:text-ink'
                 }`}
               >
@@ -93,7 +97,7 @@ export default function Nav() {
             <a
               href='#contact'
               className={`inline-flex items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm font-medium transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:bg-accent hover:text-white ${
-                light ? 'bg-paper text-ink' : 'bg-ink text-paper'
+                light ? 'bg-white text-[#16150f]' : 'bg-ink text-paper'
               }`}
             >
               Get in touch
@@ -112,12 +116,12 @@ export default function Nav() {
           >
             <span
               className={`h-px w-6 transition-[transform,background-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                light ? 'bg-paper' : 'bg-ink'
+                light ? 'bg-white' : 'bg-ink'
               } ${open ? 'translate-y-[3.5px] rotate-45' : ''}`}
             />
             <span
               className={`h-px w-6 transition-[transform,background-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                light ? 'bg-paper' : 'bg-ink'
+                light ? 'bg-white' : 'bg-ink'
               } ${open ? '-translate-y-[3.5px] -rotate-45' : ''}`}
             />
           </m.button>
