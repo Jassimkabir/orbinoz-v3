@@ -12,6 +12,7 @@ import {
   Facebook01Icon,
 } from '@hugeicons/core-free-icons';
 import { Icon } from './ui/hugeicon';
+import ThemeToggle from './ThemeToggle';
 import { useTheme } from './useTheme';
 import { LOGO_BLACK, LOGO_WHITE } from '@/lib/images';
 
@@ -94,6 +95,13 @@ export default function Nav() {
                 {l.label}
               </a>
             ))}
+            <ThemeToggle
+              className={
+                light
+                  ? 'text-white/80 hover:text-white'
+                  : 'text-ink-2 hover:text-ink'
+              }
+            />
             <a
               href='#contact'
               className={`inline-flex items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm font-medium transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:bg-accent hover:text-white ${
@@ -196,6 +204,8 @@ export default function Nav() {
                 info@orbinozevents.com
               </a>
               <div className='flex gap-2.5'>
+                <ThemeToggle className='border border-line text-ink-2 hover:border-ink hover:text-ink' />
+                <span className='mx-0.5 self-center h-6 w-px bg-line' aria-hidden />
                 {SOCIALS.map((s) => (
                   <a
                     key={s.label}

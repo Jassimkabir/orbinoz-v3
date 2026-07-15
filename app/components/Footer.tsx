@@ -100,7 +100,7 @@ export default function Footer() {
             ))}
           </nav>
           <div className='flex gap-2.5'>
-            <ThemeToggle />
+            <ThemeToggle className='border border-white/12 text-paper/70 hover:border-accent-bright hover:text-paper' />
             <span className='mx-0.5 self-center h-6 w-px bg-white/12' aria-hidden />
             {SOCIALS.map((s) => (
               <a

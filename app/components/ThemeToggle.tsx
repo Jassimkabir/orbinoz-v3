@@ -4,9 +4,10 @@ import { useCallback } from 'react';
 import { flushSync } from 'react-dom';
 import { Moon02Icon, Sun03Icon } from '@hugeicons/core-free-icons';
 import { Icon } from './ui/hugeicon';
+import { cn } from '@/lib/utils';
 import { applyTheme, getTheme, useTheme } from './useTheme';
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ className }: { className?: string }) {
   const theme = useTheme();
   const isDark = theme === 'dark';
 
@@ -39,7 +40,10 @@ export default function ThemeToggle() {
       aria-checked={isDark}
       aria-label='Toggle dark mode'
       title={isDark ? 'Switch to light' : 'Switch to dark'}
-      className='group relative flex h-10 w-10 items-center justify-center rounded-lg border border-white/12 text-paper/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-bright hover:text-paper'
+      className={cn(
+        'group relative flex h-10 w-10 items-center justify-center rounded-lg transition-all duration-300 hover:-translate-y-0.5',
+        className,
+      )}
     >
       <span className='relative h-[18px] w-[18px]'>
         <Icon
