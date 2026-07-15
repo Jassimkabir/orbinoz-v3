@@ -4,7 +4,6 @@ import {
   ArrowUpRight01Icon,
   InstagramIcon,
   Linkedin01Icon,
-  NewTwitterIcon,
   WhatsappIcon,
   Facebook01Icon,
 } from '@hugeicons/core-free-icons';
@@ -24,27 +23,22 @@ const NAV = [
 const SOCIALS = [
   {
     label: 'Instagram',
-    href: 'https://www.instagram.com/orbinozevents/',
+    href: 'https://www.instagram.com/orbinoz.eventplanners',
     icon: InstagramIcon,
   },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/company/orbinoz',
+    href: 'https://www.linkedin.com/company/orbinoz-event-planners-pvt-ltd/',
     icon: Linkedin01Icon,
   },
   {
-    label: 'Twitter',
-    href: 'https://twitter.com/orbinoz',
-    icon: NewTwitterIcon,
-  },
-  {
     label: 'Facebook',
-    href: 'https://www.facebook.com/orbinozevents',
+    href: 'https://www.facebook.com/share/1JopeK5572/',
     icon: Facebook01Icon,
   },
 ];
 
-const WHATSAPP_LINK = 'https://wa.me/919744458580';
+const WHATSAPP_LINK = 'https://wa.me/918075011422';
 
 export default function Footer() {
   return (
@@ -106,6 +100,8 @@ export default function Footer() {
               <a
                 key={s.label}
                 href={s.href}
+                target='_blank'
+                rel='noopener noreferrer'
                 aria-label={s.label}
                 className='flex h-10 w-10 items-center justify-center rounded-lg border border-white/12 text-paper/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-bright hover:text-paper'
               >

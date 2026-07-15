@@ -8,7 +8,6 @@ import {
   ArrowUpRight01Icon,
   InstagramIcon,
   Linkedin01Icon,
-  NewTwitterIcon,
   Facebook01Icon,
 } from '@hugeicons/core-free-icons';
 import { Icon } from './ui/hugeicon';
@@ -26,10 +25,21 @@ const LINKS = [
 ];
 
 const SOCIALS = [
-  { label: 'Instagram', icon: InstagramIcon },
-  { label: 'LinkedIn', icon: Linkedin01Icon },
-  { label: 'Twitter', icon: NewTwitterIcon },
-  { label: 'Facebook', icon: Facebook01Icon },
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/orbinoz.eventplanners',
+    icon: InstagramIcon,
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/company/orbinoz-event-planners-pvt-ltd/',
+    icon: Linkedin01Icon,
+  },
+  {
+    label: 'Facebook',
+    href: 'https://www.facebook.com/share/1JopeK5572/',
+    icon: Facebook01Icon,
+  },
 ];
 
 export default function Nav() {
@@ -209,7 +219,9 @@ export default function Nav() {
                 {SOCIALS.map((s) => (
                   <a
                     key={s.label}
-                    href='#'
+                    href={s.href}
+                    target='_blank'
+                    rel='noopener noreferrer'
                     aria-label={s.label}
                     className='flex h-10 w-10 items-center justify-center rounded-lg border border-line text-ink-2 transition-colors hover:border-ink hover:text-ink'
                   >

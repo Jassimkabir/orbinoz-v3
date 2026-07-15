@@ -126,7 +126,7 @@ export default function Hero() {
                 transition={{ duration: 0.8, ease: EASE, delay: 0.15 }}
                 className='mb-6 flex items-center gap-2.5 text-[0.74rem] font-medium uppercase tracking-[0.16em] text-paper/70'
               >
-                Corporate event studio, Kochi
+                Corporate event planners, Kochi
               </m.p>
               <h1 className='font-display text-[clamp(2.9rem,8vw,7rem)] font-light leading-[0.96] tracking-[-0.03em] text-paper'>
                 <AnimatedHeading text='Moments engineered' delay={0.15} />

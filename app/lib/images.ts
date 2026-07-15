@@ -19,6 +19,7 @@ import h1 from '../../public/hero/1.jpg';
 import h2 from '../../public/hero/2.jpg';
 import h3 from '../../public/hero/3.jpg';
 import h4 from '../../public/hero/4.jpg';
+import sCorporate from '../../public/services/corporate.jpg';
 import founderCutout from '../../public/founder-cutout.webp';
 import logoBlack from '../../public/icons/logo-black.webp';
 import logoWhite from '../../public/icons/logo-white.webp';
@@ -66,6 +67,7 @@ export const IMAGES: Record<string, StaticImageData> = {
   '/hero/3.jpg': h3,
   '/hero/4.jpg': h4,
   '/founder-cutout.webp': founderCutout,
+  '/services/corporate.jpg': sCorporate,
 };
 
 export function img(path: string): StaticImageData {

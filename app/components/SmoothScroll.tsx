@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 import { LazyMotion, MotionConfig, domMax } from "framer-motion";
+import { setLenis } from "@/lib/lenis";
 
 /**
  * Global Lenis smooth scrolling. Runs its own rAF loop and handles smooth
@@ -26,6 +27,7 @@ export default function SmoothScroll({
       syncTouch: false,
       touchMultiplier: 1.6,
     });
+    setLenis(lenis);
 
     let raf = 0;
     const loop = (time: number) => {
@@ -50,6 +52,7 @@ export default function SmoothScroll({
       document.removeEventListener("click", onClick);
       cancelAnimationFrame(raf);
       lenis.destroy();
+      setLenis(null);
     };
   }, []);
 

@@ -13,7 +13,6 @@ import {
   WhatsappIcon,
   InstagramIcon,
   Linkedin01Icon,
-  NewTwitterIcon,
   Facebook01Icon,
 } from '@hugeicons/core-free-icons';
 import { Reveal } from './motion';
@@ -30,27 +29,22 @@ const MAPS_LINK =
   'https://www.google.com/maps/search/?api=1&query=Orbinoz+Event+Planners+Pvt+Ltd+Kochi';
 const MAP_EMBED_SRC =
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.0870132832065!2d76.32189347475835!3d10.009671272868792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080d2737e1ea6f%3A0x38c6f7a56727381c!2sOrbinoz%20EventPlanners%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1776634907486!5m2!1sen!2sin';
-const WHATSAPP_LINK = 'https://wa.me/919744458580';
+const WHATSAPP_LINK = 'https://wa.me/918075011422';
 
 const SOCIALS = [
   {
     label: 'Instagram',
-    href: 'https://www.instagram.com/orbinozevents/',
+    href: 'https://www.instagram.com/orbinoz.eventplanners',
     icon: InstagramIcon,
   },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/company/orbinoz',
+    href: 'https://www.linkedin.com/company/orbinoz-event-planners-pvt-ltd/',
     icon: Linkedin01Icon,
   },
   {
-    label: 'Twitter',
-    href: 'https://twitter.com/orbinoz',
-    icon: NewTwitterIcon,
-  },
-  {
     label: 'Facebook',
-    href: 'https://www.facebook.com/orbinozevents',
+    href: 'https://www.facebook.com/share/1JopeK5572/',
     icon: Facebook01Icon,
   },
 ];
