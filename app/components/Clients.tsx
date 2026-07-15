@@ -10,20 +10,10 @@ export default function Clients() {
   return (
     <section
       id='clients'
-      className='scroll-mt-24 border-t border-line py-24 sm:py-32'
+      className='scroll-mt-24 border-t border-line py-16 sm:py-24'
     >
       <div className='mx-auto max-w-[1440px] px-5 sm:px-8'>
-        {/* Masthead */}
-        <Reveal>
-          <div className='flex items-center justify-between border-b border-line pb-5'>
-            <span className='eyebrow'>Clients</span>
-            <span className='text-sm text-muted'>
-              <span className='text-ink'>17</span> brand partners
-            </span>
-          </div>
-        </Reveal>
-
-        <div className='mt-12 grid gap-10 lg:grid-cols-12 lg:gap-16'>
+        <div className='grid gap-10 lg:grid-cols-12 lg:gap-16'>
           <div className='lg:col-span-5'>
             <Reveal delay={0.05}>
               <h2 className='font-display text-[clamp(2.2rem,4vw,3.4rem)] font-light leading-[1.02] tracking-[-0.02em] text-ink'>

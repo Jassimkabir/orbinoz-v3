@@ -169,10 +169,10 @@ export default function Services() {
         />
 
         {/* Content — left-aligned editorial column: eyebrow / detail / nav */}
-        <div className='relative z-10 mx-auto grid h-full max-w-[1440px] grid-rows-[auto_1fr_auto] px-6 pb-14 pt-28 sm:px-10 sm:pb-16 sm:pt-32'>
+        <div className='relative z-10 mx-auto grid h-full max-w-[1440px] grid-rows-[auto_1fr_auto] px-5 pb-10 pt-24 sm:px-10 sm:pb-16 sm:pt-32'>
           <p className='eyebrow'>What we do</p>
 
-          <div className='flex items-center'>
+          <div className='flex min-h-0 min-w-0 items-center'>
             <AnimatePresence mode='wait' initial={false}>
               <m.div
                 key={active.title}
@@ -183,22 +183,22 @@ export default function Services() {
                 initial='hidden'
                 animate='show'
                 exit='exit'
-                className='w-full'
+                className='w-full min-w-0'
               >
                 <m.h2
                   variants={line}
-                  className='max-w-2xl font-display text-[clamp(2.3rem,5.5vw,4.5rem)] font-light leading-[1] tracking-[-0.03em] text-paper'
+                  className='max-w-2xl font-display text-[clamp(1.9rem,6vw,4.5rem)] font-light leading-[1] tracking-[-0.03em] text-paper'
                 >
                   {active.title}
                 </m.h2>
                 <m.div
                   variants={line}
-                  className='mt-6 flex flex-nowrap gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
+                  className='mt-4 flex flex-wrap gap-2 sm:mt-6'
                 >
                   {active.tags.map((t) => (
                     <span
                       key={t}
-                      className='shrink-0 whitespace-nowrap rounded-full border border-accent-bright/25 bg-accent-bright/5 px-3 py-1 text-[0.68rem] font-medium uppercase tracking-[0.1em] text-accent-bright sm:text-xs'
+                      className='whitespace-nowrap rounded-full border border-accent-bright/25 bg-accent-bright/5 px-3 py-1 text-[0.66rem] font-medium uppercase tracking-[0.08em] text-accent-bright sm:text-xs sm:tracking-[0.1em]'
                     >
                       {t}
                     </span>
@@ -206,7 +206,7 @@ export default function Services() {
                 </m.div>
                 <m.p
                   variants={line}
-                  className='mt-6 max-w-xl text-pretty text-[0.95rem] leading-relaxed text-paper/75 sm:text-base'
+                  className='mt-4 max-h-[42svh] max-w-xl overflow-y-auto overscroll-contain text-pretty text-[0.9rem] leading-relaxed text-paper/75 [scrollbar-width:none] sm:mt-6 sm:text-base [&::-webkit-scrollbar]:hidden'
                 >
                   {active.desc}
                 </m.p>

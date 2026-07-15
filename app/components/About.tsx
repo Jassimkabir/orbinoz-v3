@@ -86,7 +86,7 @@ export default function About() {
 
       <section
         id='about'
-        className='mx-auto max-w-[1440px] scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32'
+        className='mx-auto max-w-[1440px] scroll-mt-24 px-5 py-16 sm:px-8 sm:py-24'
       >
         <div className='grid gap-8 lg:grid-cols-12'>
           <div className='lg:col-span-3'>

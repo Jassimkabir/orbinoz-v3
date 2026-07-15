@@ -5,7 +5,7 @@ export const SITE = {
   name: 'Orbinoz Event Planners',
   shortName: 'Orbinoz',
   legalName: 'Orbinoz Event Planners Pvt Ltd',
-  title: 'Orbinoz | Corporate Event Management in Kochi, Kerala',
+  title: 'Orbinoz Event Planners Pvt. Ltd.',
   description:
     'Orbinoz is a corporate event management company in Kochi, Kerala. Conferences, product launches, award nights, dealer meets and brand activations — planned and produced end to end.',
   locale: 'en_IN',

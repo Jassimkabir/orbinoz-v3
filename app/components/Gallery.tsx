@@ -34,13 +34,12 @@ export default function Gallery() {
   }, [open, close, step]);
 
   return (
-    <section id="gallery" className="scroll-mt-24 py-24 sm:py-32">
+    <section id="gallery" className="scroll-mt-24 py-16 sm:py-24">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8">
         <div className="mb-12 flex items-end justify-between gap-6">
           <div>
-            <Reveal><p className="eyebrow">Selected work</p></Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="mt-6 font-display text-[clamp(2rem,4.4vw,3.4rem)] font-light leading-[1.05] tracking-[-0.02em] text-ink">
+            <Reveal>
+              <h2 className="font-display text-[clamp(2rem,4.4vw,3.4rem)] font-light leading-[1.05] tracking-[-0.02em] text-ink">
                 Rooms we&apos;ve moved.
               </h2>
             </Reveal>

@@ -119,7 +119,7 @@ export default function Reviews() {
   return (
     <section
       id='reviews'
-      className='overflow-hidden bg-paper py-16 sm:py-20'
+      className='overflow-hidden bg-paper py-16 sm:py-24'
     >
       <div className='mx-auto max-w-[1440px] px-5 sm:px-8'>
         <Reveal>

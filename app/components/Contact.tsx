@@ -53,7 +53,7 @@ export default function Contact() {
   const [sent, setSent] = useState(false);
 
   return (
-    <section id='contact' className='scroll-mt-24 bg-paper-2 py-24 sm:py-32'>
+    <section id='contact' className='scroll-mt-24 bg-paper-2 py-16 sm:py-24'>
       <div className='mx-auto grid max-w-[1440px] gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20'>
         <div>
           <Reveal>

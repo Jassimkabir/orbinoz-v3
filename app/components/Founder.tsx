@@ -17,7 +17,7 @@ export default function Founder() {
   const imgY = useTransform(scrollYProgress, [0, 1], ['3.5%', '-3.5%']);
 
   return (
-    <section id='founder' className='scroll-mt-24 py-20 sm:py-28'>
+    <section id='founder' className='scroll-mt-24 py-16 sm:py-24'>
       <div className='mx-auto max-w-[1200px] px-5 sm:px-8'>
         <div className='grid items-center gap-12 lg:grid-cols-12 lg:gap-14'>
           {/* Portrait: clipped at the bottom, head crests the frame */}

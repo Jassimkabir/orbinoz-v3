@@ -167,11 +167,16 @@ iframe {
   display: inline-flex;
   align-items: center;
   gap: 0.6em;
-  font-size: 0.74rem;
+  font-size: 0.66rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-muted);
+}
+@media (min-width: 640px) {
+  .eyebrow {
+    font-size: 0.74rem;
+  }
 }
 
 .text-accent {
